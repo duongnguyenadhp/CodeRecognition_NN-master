@@ -33,16 +33,16 @@ namespace NeuralNet
         {
             return  weight;
         }
-        //Gán deltaWeight = bSlope * giá trị hàm activation của node* -tiLeHoc(Công thức trên wiki)
-        public void SetDeltaWeight(double bSlope, double tiLeHoc)
+        //Gán deltaWeight = doDoc * giá trị hàm activation của node* -tiLeHoc(Công thức trên wiki)
+        public void SetDeltaWeight(double doDoc, double tiLeHoc)
         {
-            deltaWeight = (bSlope * nodeTruoc.value) * (tiLeHoc * -1);
+            deltaWeight = (doDoc * nodeTruoc.gtriSauSigmoid) * (tiLeHoc * -1);
         }
 
         //This is the same as weight * activation of the nodeTruocNode
-        public double WeightedValue
+        public double WeightedgtriSauSigmoid
         {
-            get {return (nodeTruoc.value * this.weight); }
+            get {return (nodeTruoc.gtriSauSigmoid * this.weight); }
         }
         //Gán lại giá trị weight=trung bình cộng của các weight
         public void SetNewWeight(int repetitions)

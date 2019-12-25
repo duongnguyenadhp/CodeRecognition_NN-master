@@ -13,11 +13,11 @@ namespace NeuralNet
         public List<Link> linksTruoc = new List<Link>();
         public double bias;
         double deltaBias = 0; 
-        public double value = 0; //giá trị activation
+        public double gtriSauSigmoid = 0; //giá trị activation
         public double gtriTruocSigmoid; //giá trị trước khi tính sigmoid
         public double dCda;
         public int y = 0;
-        double bSlope;// độ dốc, dùng để điều chỉnh lại trọng số lúc lan truyền ngược
+        double doDoc;// độ dốc, dùng để điều chỉnh lại trọng số lúc lan truyền ngược
 
         public Node(double bias)
         {
@@ -33,9 +33,9 @@ namespace NeuralNet
             linksSau.Add(connection);
         }
 
-        public void SetValue(double value)
+        public void SetgtriSauSigmoid(double gtriSauSigmoid)
         {
-            this.value = value;
+            this.gtriSauSigmoid = gtriSauSigmoid;
         }
 
         public void SetBias(double bias)
@@ -46,13 +46,13 @@ namespace NeuralNet
         public void GanDelta(double learnRate)
         {   
             //Gán DeltaBias của node
-            bSlope = dCda * SigmoidD(gtriTruocSigmoid);
-            deltaBias += (bSlope * (learnRate * -1));
+            doDoc = dCda * SigmoidD(gtriTruocSigmoid);
+            deltaBias += (doDoc * (learnRate * -1));
 
             //Gán deltaWeight của mọi weight liền kề nó
             foreach (var link in linksSau)
             {
-                link.SetDeltaWeight(bSlope, learnRate);
+                link.SetDeltaWeight(doDoc, learnRate);
             }
 
         }
@@ -60,11 +60,11 @@ namespace NeuralNet
         //Gán giá trị và gtriTruocSigmoid của node
         public virtual void LanTruyenTien()
         {
-            double sum = 0;
+            double tong = 0;
             foreach (var link in linksSau)
-                sum += link.WeightedValue;
-            gtriTruocSigmoid = (sum + bias);
-            value = Sigmoid(gtriTruocSigmoid);
+                tong += link.WeightedgtriSauSigmoid;
+            gtriTruocSigmoid = (tong + bias);
+            gtriSauSigmoid = Sigmoid(gtriTruocSigmoid);
 
         }
 
@@ -84,18 +84,18 @@ namespace NeuralNet
         //Tính đạo hàm của giá trị liên quan đến hàm kích hoạt output layer
         public void CalculateOutputDCda()
         {
-            dCda = 2.0 * (value - y);
+            dCda = 2.0 * (gtriSauSigmoid - y);
         }
 
         //Tính đạo hàm của giá trị liên quan đến hàm kích hoạt
         public void CalculateDCda()
         {
-            double sum = 0.0;
+            double tong = 0.0;
             foreach (var link in linksTruoc)
             {
-                sum += (link.GetWeight() * (link.nodeSau.bSlope));
+                tong += (link.GetWeight() * (link.nodeSau.doDoc));
             }
-            dCda = sum;
+            dCda = tong;
         }
         
         //Gán giá trị mới cho Bias= tổng trung bình cộng của số lần lặp lại mà nó lan truyền ngược

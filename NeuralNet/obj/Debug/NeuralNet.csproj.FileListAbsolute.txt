@@ -27,3 +27,13 @@ C:\Users\Nguyen-PC\Downloads\Programs\CodeRecognition_NN-master\NeuralNet\obj\De
 C:\Users\Nguyen-PC\Downloads\Programs\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.csproj.GenerateResource.cache
 C:\Users\Nguyen-PC\Downloads\Programs\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.exe
 C:\Users\Nguyen-PC\Downloads\Programs\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.pdb
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\bin\Debug\NeuralNet.exe.config
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\bin\Debug\NeuralNet.exe
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\bin\Debug\NeuralNet.pdb
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.csprojAssemblyReference.cache
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.Form1.resources
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.Properties.Resources.resources
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.csproj.GenerateResource.cache
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.csproj.CoreCompileInputs.cache
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.exe
+D:\GitClone\CodeRecognition_NN-master\NeuralNet\obj\Debug\NeuralNet.pdb

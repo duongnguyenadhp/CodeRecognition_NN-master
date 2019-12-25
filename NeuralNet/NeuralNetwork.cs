@@ -15,7 +15,7 @@ namespace NeuralNet
         Layer tangOutput;
         double tiLeHoc = 3.0;
         //Số lần lặp lại trước khi cập nhật weight và bias
-        int deltaRepetitions = 10; //Số lần lặp lại trước khi gán weight mới và bias
+        int lapLai = 10; //Số lần lặp lại trước khi gán weight mới và bias
         // 28px x 28px=748
         const int KICH_THUOC_ANH = 784;
         const int KICH_THUOC_OUTPUT = 10;
@@ -45,19 +45,19 @@ namespace NeuralNet
             this.index = index;
             for (int i = 0; i < tangInput.nodes.Length; i++)
             {
-                tangInput.nodes[i].value = byteArrayIn[i] / 255.0;
+                tangInput.nodes[i].gtriSauSigmoid = byteArrayIn[i] / 255.0;
             }
         }
         // Trả về đầu ra của mạng neural và gán giá trị ys của các node trong tangOutput
         public int LayOutput()
         {
-            double max = tangOutput.nodes[0].value;
+            double max = tangOutput.nodes[0].gtriSauSigmoid;
             int maxOutput = 0;
             for (int i = 1; i < tangOutput.nodes.Length; i++)
             {
-                if (tangOutput.nodes[i].value > max)
+                if (tangOutput.nodes[i].gtriSauSigmoid > max)
                 {
-                    max = tangOutput.nodes[i].value;
+                    max = tangOutput.nodes[i].gtriSauSigmoid;
                     maxOutput = i;
                 }
             }
@@ -119,7 +119,7 @@ namespace NeuralNet
 
         }
 
-        //Kết nối layer trước và sau
+        //Kết nối layer trước và layer sau
         void KetNoiTang(Layer fromLayer, Layer toLayer)
         {
             for (int i = 0; i < toLayer.nodes.Length; i++)
@@ -145,11 +145,11 @@ namespace NeuralNet
         public void TrainNN()
         {
             new Random().TronDuLieu(mnistTrain.images, mnistTrain.labels);
-            //Số lần lặp lại toàn bộ tiến trình = mnistTrain.labels.Length / deltaRepetitions / 6 * 5
+            //Số lần lặp lại toàn bộ tiến trình = mnistTrain.labels.Length / lapLai / 6 * 5
             int totalRepetitions = 5000;
             for (int j = 0; j < totalRepetitions; j++)
             {
-                for (int i = 0; i < deltaRepetitions; i++)
+                for (int i = 0; i < lapLai; i++)
                 {
                     GanDuLieuInput(mnistTrain.images[index], index);
                     LanTruyenTienNeural();
@@ -159,9 +159,9 @@ namespace NeuralNet
                     LanTruyenNguoc(tangAn1);
                     index++;
                 }
-                GanDelta(tangOutput, deltaRepetitions);
-                GanDelta(tangAn2, deltaRepetitions);
-                GanDelta(tangAn1, deltaRepetitions);
+                GanDelta(tangOutput, lapLai);
+                GanDelta(tangAn2, lapLai);
+                GanDelta(tangAn1, lapLai);
             }
             //Gán lại chỉ số
             index = 0;
